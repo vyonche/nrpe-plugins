@@ -67,7 +67,7 @@ if [ "$2" = "-w" ] && [ "$3" -gt "0" ] && [ "$4" = "-c" ] && [ "$5" -gt "0" ] ; 
   CPU=$(expr ${CPUUSAGE%%.*} / ${CPUCORES})
 
   if [[ $warn -lt ${CPU%%.*} ]]; then
-    if [ $crit -lt ${CPU%%.*} ]]; then
+    if [[ $crit -lt ${CPU%%.*} ]]; then
       echo "CRITICAL - CPU Usage = $CPU% | CPU Usage=$CPU%;$warn;$crit;0;100"
       exit 2
     else
