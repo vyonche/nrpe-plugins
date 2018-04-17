@@ -62,12 +62,12 @@ if [ "$2" = "-w" ] && [ "$3" -gt "0" ] && [ "$4" = "-c" ] && [ "$5" -gt "0" ] ; 
 #   Check the container internal cpu usage
 #----------------------------------------------------------------------------------------------------------
 
-  CPUUSAGE="$(docker stats --no-stream $CONTAINER | grep -A1 CONTAINER | grep -v CONTAINER | awk '{print $2}')"
+  CPUUSAGE="$(docker stats --no-stream $CONTAINER | grep -A1 CONTAINER | grep -v CONTAINER | awk '{print $3}')"
 
   CPU=$(expr ${CPUUSAGE%%.*} / ${CPUCORES})
 
-  if [ $warn -lt ${CPU%%.*} ];then
-    if [ $crit -lt ${CPU%%.*} ]; then
+  if [[ $warn -lt ${CPU%%.*} ]]; then
+    if [ $crit -lt ${CPU%%.*} ]]; then
       echo "CRITICAL - CPU Usage = $CPU% | CPU Usage=$CPU%;$warn;$crit;0;100"
       exit 2
     else
